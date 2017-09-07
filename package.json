@@ -1,0 +1,31 @@
+{
+  "name": "url_shortener_service",
+  "version": "1.0.0",
+  "description": "A scalable url shortening service using MEAN stack.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LiJunpeng/URLShortenerService.git"
+  },
+  "keywords": [
+    "tinyurl",
+    "url",
+    "shortener",
+    "url",
+    "shortening"
+  ],
+  "author": "Junpeng Li",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LiJunpeng/URLShortenerService/issues"
+  },
+  "homepage": "https://github.com/LiJunpeng/URLShortenerService#readme"
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "mongoose": "^4.6.0"
+  }
+}
