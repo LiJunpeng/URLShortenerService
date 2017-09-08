@@ -36,10 +36,14 @@ var getShortUrl = function (longUrl, callback) {
 };
 
 var generateShortUrl = function (callback) {
-
-    UrlModel.find({}, function (err, urls) {
-        callback(convertTo62(urls.length));
-    });  // 找到数据库中所有数据
+    var random_number = Math.floor(Math.random() * 218340105584896); // up to 8 digits
+    UrlModel.findOne({shortUrl: convertTo62(random_number)}, function (err, urls) {
+        if(urls == null) {
+            callback(convertTo62(random_number));
+        } else {
+            generateShortUrl(callback);
+        }
+    });  
 };
 
 var convertTo62 = function (num) {
