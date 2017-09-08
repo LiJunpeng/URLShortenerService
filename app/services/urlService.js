@@ -1,4 +1,9 @@
 var UrlModel = require('../models/urlModel');
+var redis = require("redis");
+var host = process.env.REDIS_PORT_6379_TCP_ADDR || '127.0.0.1';
+var port = process.env.REDIS_PORT_6379_TCP_PORT || '6379';
+
+var redisClient = redis.createClient(port, host);
 
 var encode = [];
 
@@ -22,18 +27,36 @@ var getShortUrl = function (longUrl, callback) {
         longUrl = "http://" + longUrl;
     }
 
-    UrlModel.findOne({ longUrl: longUrl}, function (err, url) {
-        if(url) {
-            callback(url);
+    redisClient.get(longUrl, function (err, shortUrl) {
+        if (shortUrl) {
+            console.log("Get short url: " + shortUrl + " from Redis");  // debug
+            callback({
+                shortUrl: shortUrl,
+                longUrl: longUrl
+            });
         } else {
-            generateShortUrl(function (shortUrl) {
-                var url = new UrlModel({ shortUrl: shortUrl, longUrl: longUrl});
-                url.save(); // 存入数据库
-                callback(url);
+            UrlModel.findOne({ longUrl: longUrl}, function (err, url) {
+                if(url) {
+                    console.log("Get short url: " + url.shortUrl + " from MongoDB");  // debug
+                    callback(url);
+                    redisClient.set(url.shortUrl, url.longUrl);
+                    redisClient.set(url.longUrl, url.shortUrl); 
+                } else {
+                    generateShortUrl(function (shortUrl) {
+                        console.log("Create and saved short url: " + shortUrl);  // debug
+                        var url = new UrlModel({ shortUrl: shortUrl, longUrl: longUrl});
+                        url.save(); // 存入数据库
+                        redisClient.set(shortUrl, longUrl);
+                        redisClient.set(longUrl, shortUrl);
+                        callback(url);
+                    });
+                }
             });
         }
     });
+
 };
+
 
 var generateShortUrl = function (callback) {
     var random_number = Math.floor(Math.random() * 218340105584896); // up to 8 digits
@@ -56,9 +79,27 @@ var convertTo62 = function (num) {
 };
 
 var getLongUrl = function (shortUrl, callback) {
-    UrlModel.findOne({shortUrl: shortUrl}, function (err, url) {
-        callback(url);
+    redisClient.get(shortUrl, function (err, longUrl) {
+        if (longUrl) {
+            console.log("Get long url: " + longUrl + " from Redis"); // debug
+            callback({
+                shortUrl: shortUrl,
+                longUrl: longUrl
+            });
+        } else {
+            UrlModel.findOne({shortUrl: shortUrl}, function (err, url) {
+                callback(url);
+                if (url) {
+                    console.log("Get long url: " + url.longUrl + " from MongoDB and save to Redis");  // debug
+                    redisClient.set(url.longUrl, url.shortUrl);
+                    redisClient.set(url.shortUrl, url.longUrl);
+                } else {
+                    console.log("Can't find long url by: " + shortUrl); // debug
+                }
+            })
+        }
     })
+
 };
 
 module.exports = {
