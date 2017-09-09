@@ -9,6 +9,8 @@ nginx:
 
 app1:
   build: ./app
+  volumes:
+    - "./app:/app"
   ports:
     - "3000"
   links:
@@ -16,6 +18,8 @@ app1:
 
 app2:
   build: ./app
+  volumes:
+    - "./app:/app"
   ports:
     - "3000"
   links:
@@ -23,6 +27,8 @@ app2:
 
 app3:
   build: ./app
+  volumes:
+    - "./app:/app"
   ports:
     - "3000"
   links:

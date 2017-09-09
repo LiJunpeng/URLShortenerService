@@ -12,4 +12,4 @@ RUN cd /app && npm install
 
 EXPOSE 3000
 
-CMD ["node", "/app/server.js"]
+CMD ["nodemon", "/app/server.js"]

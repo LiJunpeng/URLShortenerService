@@ -1,4 +1,4 @@
-var geoip = require("geoip-lite");
+var geoip = require('geoip-lite');
 var RequestModel = require("../models/requestModel");
 
 var logRequest = function (shortUrl, req) {
