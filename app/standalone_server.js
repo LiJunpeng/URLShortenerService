@@ -6,13 +6,13 @@ var redirectRouter = require('./routes/redirect');
 var indexRouter = require('./routes/index');
 var mongoose = require('mongoose');
 var dbLink = require('./DBaccess');
+var useragent = require("express-useragent");
 
 mongoose.connect(dbLink.dbLink);
 
-app.longToShortHash = {};
-app.shortToLongHash = {};   // 为了方便用全局变量object，实际项目中不要这样做   
-
 app.use('/public', express.static(__dirname + "/public")); // browser请求的文件放在public里,作为静态文件。在当前目录下的public目录下找相应的静态文件
+
+app.use(useragent.express);
 
 app.use('/api/v1', restRouter);
 
