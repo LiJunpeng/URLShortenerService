@@ -41,13 +41,15 @@ var getUrlInfo = function (shortUrl, info, callback) {
         },
         {
             $sort: {
-                timestamp: -1;
+                timestamp: -1
             }
         },
         {
             $group: {
                 _id: groupId,         // grouping
-                count: { $sum: 1}     // sum number
+                count: { 
+                    $sum: 1
+                }     // sum number
             }
         }
         ], function (err, data) {
