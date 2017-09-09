@@ -22,9 +22,9 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 Clicks for the past: 
-                <a href="javascript:void(0);" ng-click="getTime(hour)" ng-class="{ 'text-muted': time === 'hour' }">Hour</a>
-                <a href="javascript:void(0);" ng-click="getTime(day)" ng-class="{ 'text-muted': time === 'day' }">Day</a>
-                <a href="javascript:void(0);" ng-click="getTime(month)" ng-class="{ 'text-muted': time === 'month' }">Month</a>
+                <a href="javascript:void(0);" ng-click="getTime('hour')" ng-class="{ 'text-muted': time === 'hour' }">Hour</a>
+                <a href="javascript:void(0);" ng-click="getTime('day')" ng-class="{ 'text-muted': time === 'day' }">Day</a>
+                <a href="javascript:void(0);" ng-click="getTime('month')" ng-class="{ 'text-muted': time === 'month' }">Month</a>
             </div>
             <div class="panel-body">
                 <canvas id="line" class="chart chart-line" chart-data="lineData"
