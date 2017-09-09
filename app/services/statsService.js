@@ -1,3 +1,5 @@
+var geoip = require("geoip-lite");
+
 var logRequest = function (shortUrl, req) {
     var reqInfo = {};
     reqInfo.shortUrl = shortUrl;
@@ -8,7 +10,7 @@ var logRequest = function (shortUrl, req) {
             req.connection.remoteAddress ||
             req.socket.remoteAddress || 
             req.connection.socket.remoteAddress;
-    
+
 };
 
 
