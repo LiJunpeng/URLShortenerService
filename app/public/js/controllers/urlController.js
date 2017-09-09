@@ -62,5 +62,13 @@ app.controller("urlController",
 
     $scope.getTime('hour');
 
+    $scope.getQRCode = function () {
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
+        width : 100,
+        height : 100
+        });   
+        qrcode.makeCode(JSON.stringify($scope.shortUrl));
+    }
+
 }]);
 
