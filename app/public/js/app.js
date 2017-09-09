@@ -1,4 +1,4 @@
-var app = angular.module('tinyurlApp', ['ngRoute', 'ngResource']); //ngRoute说明需要用route模块
+var app = angular.module('tinyurlApp', ['ngRoute', 'ngResource', 'chart.js']); //ngRoute说明需要用route模块
 
 app.config(function ($routeProvider) {
     $routeProvider

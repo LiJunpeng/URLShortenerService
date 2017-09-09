@@ -29,7 +29,31 @@ var getUrlInfo = function (shortUrl, info, callback) {
         RequestModel.count({ shortUrl: shortUrl}, function (err, data) {
             callback(data);
         });
+        return;
     }
+
+    var groupId = "$" + info;  // mongoDB related 
+    RequestModel.aggregate([
+        {
+            $match: {
+                shortUrl: shortUrl
+            }
+        },
+        {
+            $sort: {
+                timestamp: -1;
+            }
+        },
+        {
+            $group: {
+                _id: groupId,         // grouping
+                count: { $sum: 1}     // sum number
+            }
+        }
+        ], function (err, data) {
+        callback(data);
+    });
+
 }
 
 module.exports = {

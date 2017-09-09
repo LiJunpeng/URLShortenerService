@@ -13,5 +13,22 @@ app.controller("urlController",
             $scope.totalClicks = data;
         });
 
+    var renderChart = function (chart, infos) {
+        $scope[chart + "Data"] = [];
+        $scope[chart + "Labels"] = [];
+        $http.get("/api/v1/urls/" + $routeParams.shortUrl + "/" + infos)
+            .success(function (data) {
+                data.forEach(function (info) {
+                    $scope[chart + "Data"].push(info.count);
+                    $scope[chart + "Labels"].push(info._id);
+                });
+            });
+    }
+
+    renderChart("doughnut", "referer");
+    renderChart("pie", "country");
+    renderChart("base", "platform");
+    renderChart("bar", "browser");
+
 }]);
 

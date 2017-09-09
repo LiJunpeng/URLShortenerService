@@ -14,3 +14,54 @@
         <h1 class="panel-body">{{ totalClicks }}</h1>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Referrers
+            </div>
+            <div class="panel-body">
+                <canvas id="doughnut" class="chart chart-doughnut" chart-data="doughnutData" chart-labels="doughnutLabels">
+                </canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Countries
+            </div>
+            <div class="panel-body">
+                <canvas id="pie" class="chart chart-pie" chart-data="pieData" chart-labels="pieLabels">
+                </canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Platforms
+            </div>
+            <div class="panel-body">
+                <canvas id="base" class="chart chart-horizontal-bar" chart-data="baseData" chart-labels="baseLabels">
+                </canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Browsers
+            </div>
+            <div class="panel-body">
+                <canvas id="bar" class="chart chart-bar" chart-data="barData" chart-labels="barLabels">
+                </canvas>
+            </div>
+        </div>
+    </div>
+
+</div>

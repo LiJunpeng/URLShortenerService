@@ -12,6 +12,8 @@ mongoose.connect(dbLink.dbLink);
 
 app.use('/public', express.static(__dirname + "/public")); 
 
+app.use('/node_modules', express.static(__dirname + "/node_modules"));
+
 app.use(useragent.express());
 
 app.use('/api/v1', restRouter);
