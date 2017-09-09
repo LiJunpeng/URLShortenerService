@@ -2,6 +2,7 @@ var geoip = require("geoip-lite");
 var RequestModel = require("../models/requestModel");
 
 var logRequest = function (shortUrl, req) {
+    console.log("====> log: " + shortUrl);  // debug
     var reqInfo = {};
     reqInfo.shortUrl = shortUrl;
     reqInfo.referer = req.headers.referer || "Unknown";  // could be null
@@ -20,7 +21,7 @@ var logRequest = function (shortUrl, req) {
     reqInfo.timestamp = new Date();
     var request = new RequestModel(reqInfo);
     request.save(); // need further work to handle error
-
+    console.log("save: " + shortUrl + " : " + reqInfo.country);  // debug
 };
 
 
