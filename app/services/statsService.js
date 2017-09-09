@@ -25,14 +25,41 @@ var logRequest = function (shortUrl, req) {
 };
 
 var getUrlInfo = function (shortUrl, info, callback) {
-    if (info == "totalClicks") {
+    if (info === "totalClicks") {
         RequestModel.count({ shortUrl: shortUrl}, function (err, data) {
             callback(data);
         });
         return;
     }
 
-    var groupId = "$" + info;  // mongoDB related 
+    var groupId = ""  // group by ...
+
+    if (info === 'hour') {
+        groupId = {
+            year: {$year: "$timestamp"},
+            month: {$month: "$timestamp"},
+            day: {$dayOfMonth: "$timestamp"},
+            hour: {$hour: "$timestamp"},
+            minutes: {$minute: "$timestamp"}
+        }
+    } else if (info === 'day') {
+        groupId = {
+            year: {$year: "$timestamp"},
+            month: {$month: "$timestamp"},
+            day: {$dayOfMonth: "$timestamp"},
+            hour: {$hour: "$timestamp"}
+        }
+    } else if (info === 'month') {
+        groupId = {
+            year: {$year: "$timestamp"},
+            month: {$month: "$timestamp"},
+            day: {$dayOfMonth: "$timestamp"}
+        }
+    } else {
+        groupId = "$" + info;
+    }
+
+
     RequestModel.aggregate([
         {
             $match: {
@@ -52,7 +79,7 @@ var getUrlInfo = function (shortUrl, info, callback) {
                 }     // sum number
             }
         }
-        ], function (err, data) {
+    ], function (err, data) {
         callback(data);
     });
 
