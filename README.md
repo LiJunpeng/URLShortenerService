@@ -1,4 +1,4 @@
-URLShortenerService
+# URLShortenerService
 
 A complete version of URL Shortener Service. It takes a long url and return a short url to user. 
 The service is built using MEAN stack, and can be ran within or without docker.
