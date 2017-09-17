@@ -5,7 +5,7 @@ nginx:
   links:
     - "app1:app1"
     - "app2:app2"
-    - "app3:app3"
+    # - "app3:app3"
 
 app1:
   build: ./app
@@ -25,14 +25,14 @@ app2:
   links:
     - "cache:redis"
 
-app3:
-  build: ./app
-  volumes:
-    - "./app:/app"
-  ports:
-    - "3000"
-  links:
-    - "cache:redis"
+# app3:
+#   build: ./app
+#   volumes:
+#     - "./app:/app"
+#   ports:
+#     - "3000"
+#   links:
+#     - "cache:redis"
 
 cache:
   image: redis
