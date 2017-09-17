@@ -14,7 +14,7 @@ If you want to use my current way to access a cloud database service, you will n
   1. Under '/app' directory, create a file called 'DBaccess.js'
   2. Add following code:
   
-    var dbLink = '<your cloud db uri>';
+    var dbLink = '<your_cloud_db_uri>';
     module.exports = {
       dbLink : dbLink
     };
