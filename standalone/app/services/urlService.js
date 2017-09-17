@@ -1,6 +1,6 @@
 var UrlModel = require('../models/urlModel');
 
-var encode = [];
+var encode = [];   // local array storing characters for random encoding
 
 var genCharArray = function (charStart, charEnd) {
     var arr = [];
@@ -19,7 +19,7 @@ encode = encode.concat(genCharArray('a', 'z'));
 
 var getShortUrl = function (longUrl, callback) {
     if( longUrl.indexOf('http') == -1) {
-        longUrl = "http://" + longUrl;
+        longUrl = "http://" + longUrl;   // add prefix
     }
 
 
@@ -31,7 +31,7 @@ var getShortUrl = function (longUrl, callback) {
             generateShortUrl(function (shortUrl) {
                 console.log("Create and saved short url: " + shortUrl);  // debug
                 var url = new UrlModel({ shortUrl: shortUrl, longUrl: longUrl});
-                url.save(); // 存入数据库
+                url.save(); // save to db
                 callback(url);
             });
         }
@@ -53,7 +53,7 @@ var generateShortUrl = function (callback) {
 
 var convertTo62 = function (num) {
     var result = '';
-    do { // 用do-while，防止num=0时直接结束循环
+    do { 
         result = encode[num % 62] + result;
         num = Math.floor(num / 62);
     } while (num);

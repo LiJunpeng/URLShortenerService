@@ -10,6 +10,7 @@ app.controller("urlController",
             $scope.longUrl = data.longUrl;
             $scope.shortUrlToShow = "http://localhost/" + data.shortUrl;
             shortUrl = "http://localhost/" + data.shortUrl;
+            $scope.getQRCode();
         });
     $http.get("/api/v1/urls/" + $routeParams.shortUrl + "/totalClicks")
         .success(function (data) {
