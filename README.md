@@ -13,8 +13,8 @@ Both versions are using cloud MongoDB service (https://mlab.com/). I'm using a .
 If you want to use my current way to access a cloud database service, you will need to:
   1. Under '/app' directory, create a file called 'DBaccess.js'
   2. Add following code:
+  
     var dbLink = '<your cloud db uri>';
-
     module.exports = {
       dbLink : dbLink
     };
