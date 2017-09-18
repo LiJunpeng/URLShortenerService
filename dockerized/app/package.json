@@ -30,6 +30,7 @@
     "express-useragent": "^1.0.7",
     "geoip-lite": "^1.2.1",
     "mongoose": "^4.6.0",
-    "redis": "^2.8.0"
+    "redis": "^2.8.0",
+    "chart.js": "~2.7.0"
   }
 }
